@@ -1,0 +1,32 @@
+{
+  "name": "nodejs-hw-1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npm src/*.js start",
+    "dev": "nodemon src/*.js start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PrataCat/nodejs-hw-1.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PrataCat/nodejs-hw-1/issues"
+  },
+  "homepage": "https://github.com/PrataCat/nodejs-hw-1#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "extra": "^0.2.1",
+    "fs": "^0.0.1-security"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  },
+  "type": "module"
+}
