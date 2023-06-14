@@ -14,6 +14,8 @@ const listContacts = async () => {
   try {
     const data = await readFile(contactsPath);
     const contacts = JSON.parse(data);
+    console.table(contacts);
+    console.log(color.info("Request completed successfully."));
     return contacts;
   } catch (err) {
     console.log(err);
@@ -23,7 +25,8 @@ const listContacts = async () => {
 const getContactById = async (contactId) => {
   const contacts = await listContacts();
   const id = String(contactId);
-  const contact = contacts.find((item) => item.id === id);
+  const contact = JSON.stringify(contacts.find((item) => item.id === id));
+  console.log(color.info(`Your contact: ${contact}`));
   return contact || null;
 };
 
@@ -45,12 +48,13 @@ const addContact = async (name, email, phone) => {
 const removeContact = async (contactId) => {
   const contacts = await listContacts();
   const deletedContact = contacts.filter((item) => item.id === contactId);
+  const contactInfo = JSON.stringify(deletedContact[0]);
 
   if (deletedContact[0]) {
     const updatedContacts = contacts.filter((item) => item.id !== contactId);
     await writeFile(contactsPath, JSON.stringify(updatedContacts));
 
-    console.log(color.info(`Contact deleted: ${deletedContact}`));
+    console.log(color.info(`Contact deleted: ${contactInfo} `));
     return deletedContact;
   } else {
     console.log(color.warn("Contact not found."));

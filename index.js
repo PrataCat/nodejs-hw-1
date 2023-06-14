@@ -17,15 +17,12 @@ color.setTheme({
 const invokeAction = async ({ action, id, name, email, phone }) => {
   switch (action) {
     case "list":
-      const contacts = await listContacts();
-      console.table(contacts);
-      console.log(color.info("Request completed successfully."));
+      await listContacts();
 
       break;
 
     case "get":
-      const contact = await getContactById(id);
-      console.log(color.info(`Your contact: ${contact.name}`));
+      await getContactById(id);
 
       break;
 
@@ -35,12 +32,7 @@ const invokeAction = async ({ action, id, name, email, phone }) => {
       break;
 
     case "remove":
-      const deletedContact = await removeContact(id);
-      if (deletedContact) {
-        console.log(color.info(`Contact deleted: ${deletedContact}`));
-      } else {
-        throw new Error(color.warn(`Contact not found.`));
-      }
+      await removeContact(id);
 
       break;
 
