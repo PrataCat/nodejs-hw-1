@@ -5,6 +5,7 @@ var color = require("colors");
 color.setTheme({
   info: "green",
   warn: "yellow",
+  fail: "red",
 });
 
 const contactsPath = path.join(__dirname, "db", "contacts.json");
@@ -14,20 +15,23 @@ const listContacts = async () => {
   try {
     const data = await readFile(contactsPath);
     const contacts = JSON.parse(data);
-    console.table(contacts);
-    console.log(color.info("Request completed successfully."));
     return contacts;
   } catch (err) {
-    console.log(err);
+    console.log(err.message);
   }
 };
 
 const getContactById = async (contactId) => {
   const contacts = await listContacts();
   const id = String(contactId);
-  const contact = JSON.stringify(contacts.find((item) => item.id === id));
-  console.log(color.info(`Your contact: ${contact}`));
-  return contact || null;
+  const chosenContact = JSON.stringify(contacts.find((item) => item.id === id));
+
+  if (chosenContact) {
+    console.log(color.info(`Your contact: ${chosenContact}`));
+  } else {
+    console.log(color.fail(`Such contact doesn't exists`));
+  }
+  return chosenContact || null;
 };
 
 const addContact = async (name, email, phone) => {
@@ -57,7 +61,7 @@ const removeContact = async (contactId) => {
     console.log(color.info(`Contact deleted: ${contactInfo} `));
     return deletedContact;
   } else {
-    console.log(color.warn("Contact not found."));
+    console.log(color.fail("Contact not found."));
   }
 };
 

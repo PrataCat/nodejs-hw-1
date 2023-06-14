@@ -18,6 +18,8 @@ const invokeAction = async ({ action, id, name, email, phone }) => {
   switch (action) {
     case "list":
       await listContacts();
+      console.table(contacts);
+      console.log(color.info("Request completed successfully."));
 
       break;
 
